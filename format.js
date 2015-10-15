@@ -34,4 +34,9 @@ function format(fmt) {
   return '' + fmt;
 }
 
-module.exports = format;
+module.exports = function() {
+  if (arguments.length === 2 && Array.isArray(arguments[1])) {
+    return format.apply(null, [arguments[0]].concat(arguments[1]));
+  }
+  format.apply(null, arguments);
+};
